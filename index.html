@@ -19,7 +19,7 @@ class: center, middle, inverse, title-slide
 
 
 
-# when does it come up?
+# When does it come up?
 
 - data stored as notes
 - non-uniformly formatted data
@@ -28,36 +28,51 @@ class: center, middle, inverse, title-slide
 
 ---
 
-# let's get the basics down: what are strings?
+# What are strings?
 
-Strings (character types) is pretty much anything surrounded by quotes
+Strings (character types) = pretty much anything surrounded by quotes
 
-Double quotes are the preferred style unless your text contains double quotes
+**Double quotes** are the preferred style unless your text contains double quotes
+
+.center[
+![](https://media.giphy.com/media/xTiN0z1dTpeedhds8o/giphy.gif)
+]
 
 ---
 
+.center[.img-med[
 ![](https://media.giphy.com/media/HUjc0sbfgaInK/giphy.gif)
+]]
 
-`"Keeps away the nargles."`  
-`'Luna whispered, "Keeps away the nargles."'`  
-`"Luna's eyes widened, and she whispered, \"Keeps away the nargles.\""`
+### `"Keeps away the nargles."`  
+
+--
+### `'Luna whispered, "Keeps away the nargles."'`  
+
+--
+### `"Luna's eyes widened, and she whispered, \"Keeps away the nargles.\""`
 
 
 ---
 
-# whoa, what's with the slash?
+# What's with the slash?
 
-escapes
-
-.center[.img-auto[
+.center[.img-big[
 ![](https://media.giphy.com/media/gCwXh8EHKKfMk/giphy.gif)
 ]]
  
 ---
 
-# Escaped characters = special characters that need to be marked (or may have an alternate meaning)
+# Escaped characters
 
-is `"` literally a double-quote (chook-chik) or is it marking a character string?  
+Special characters that may have an alternate meaning
+
+In our previous case: is `"` literally a double-quote (chook-chik) or is it marking a character string?  
+
+--
+
+Some other examples:
+
 `\n` = new line  
 `\t` = tab  
 `\\` = backslash  
@@ -78,51 +93,75 @@ writeLines("Nitwit! \n\tBlubber! \n\t\tOddment! \n\U1F9D9\t\t\tTweak!")
 ## 🧙			Tweak!
 ```
 
+_You can also write emojis (or Hebrew letters) this way!_
+
 ---
 
 # UTF-8 
 
-Standard character-encoding system across *nix systems (Mac, Linux, etc) and on its way to Windows; supported by all web browsers and is the encoding system of choice
+Character-encoding system of choice but not fully supported by Windows (yet); this is how you can write in Hebrew, English, Chinese, and emojis in one sentence
 
 Want to write in Hebrew? If regular Hebrew doesn't work, you can use the code:
 
 
 ```r
-writeLines("\U05DB\U05EA\U05D1")
+writeLines("\U05DB\U05EA\U05D1") 
 ```
 
 ```
 ## כתב
 ```
 
+```r
+# write the letters-codes left-to-right but it prints right-to-left
+```
+
 ---
+
+class: inverse
 
 # stringr
 
-_A consistent, simple and easy to use set of wrappers around the `stringi` package._
-
 .center[
 ![](https://stringr.tidyverse.org/logo.png)
+
+https://stringr.tidyverse.org  
+
+_A consistent, simple and easy-to-use set of wrappers around the `stringi` package._
 ]
 
-https://stringr.tidyverse.org
-
 ---
 
-# functions for the day
+# General pattern
 
+.center[.xlarge[
+str_.gray[verb](.gray[text], .gray[...]) 
+]] 
+
+.large[
+text = character string or vector
+
+... = additional arguments include `pattern` to match or string to replace with
+]
+---
+
+# Functions for the day
+
+.large[
 - `str_count()`
 - `str_detect()`
-- `str_sub()`
+- `str_subset()`
 - `str_view()`
 - `str_extract()`, `str_remove()`, `str_replace()`
+]
 
 ---
 
-# let's get some data
+# Let's get some data
 
 
 ```r
+# from the rcorpora package
 spells &lt;- read_rds("data/spells.rds")
 
 (incantation &lt;- spells$incantation[1:5])
@@ -134,13 +173,12 @@ spells &lt;- read_rds("data/spells.rds")
 
 ---
 
-# basic pattern
-
-`str_*(VECTOR)`
+# Warm up
 
 
 ```r
-str_to_lower(incantation)
+# often a useful first step to avoid dealing with capitals
+str_to_lower(incantation) 
 ```
 
 ```
@@ -169,7 +207,7 @@ str_glue('Hermione shouted, "{incantation}!"')
 
 ---
 
-# level 2: add a pattern
+# Level 2: add a pattern
 
 
 ```r
@@ -187,6 +225,9 @@ str_subset(incantation, "o")
 ```
 ## [1] "Accio"     "Alohomora" "Anapneo"
 ```
+
+--
+
 
 ```r
 str_extract(incantation, "o.")
@@ -206,7 +247,7 @@ str_replace(incantation, "o", "!")
 
 ---
 
-# once more, with feeling!
+# Once more, with feeling!
 
 
 ```r
@@ -230,6 +271,11 @@ str_extract_all(incantation, "o.")
 ## character(0)
 ```
 
+---
+
+# Once more, with feeling!
+
+
 ```r
 str_replace_all(incantation, "o", "!")
 ```
@@ -240,25 +286,58 @@ str_replace_all(incantation, "o", "!")
 
 ---
 
-# level 3: use regex
+class: exercise
 
-`str_view()` and `str_view_all()` are your friends
+# Your turn
 
-https://regex101.com
-https://www.garrickadenbuie.com/project/regexplain/
+How many `object`s are there in the effect description? Replace `object` with a different noun. 
+
+
+```r
+spells
+```
+
+```
+## # A tibble: 91 x 3
+##   incantation effect                     type 
+##   &lt;chr&gt;       &lt;chr&gt;                      &lt;chr&gt;
+## 1 Accio       Summons an object          Charm
+## 2 Aguamenti   Shoots water from wand     Charm
+## 3 Alohomora   Opens locked objects       Charm
+## 4 Anapneo     Clears the target's airway Spell
+## 5 Aparecium   Reveals invisible ink      Spell
+## # … with 86 more rows
+```
+
 
 ---
 
-# regex is hard to read and hard to write
+class: inverse, center, middle
 
-If this presentation doesn't help, take a look at the [rebus](https://cran.r-project.org/web/packages/rebus/rebus.pdf) package
+.xlarge[regex]
+
+## regular expresions
 
 ---
 
-# key expressions that I use
+# regex helpers
+
+.center[.xlarge[`str_view_all()`]] 
+
+and `str_view()` are your friends
+
+Other resources:
+
+- [regex101](https://regex101.com) - interepret regex
+- [regexplain](https://www.garrickadenbuie.com/project/regexplain/) - interpret and write regex (lots of cheatsheets)
+- [rex](https://github.com/kevinushey/rex) package - "friendly" regex
+- [rebus](https://cran.r-project.org/web/packages/rebus/rebus.pdf) pacjkage - "friendly" regex
+
+---
+
+# Key expressions that I use
   
-
-`.` = anything
+`.` = anything  
 `*` = 0 or more  
 `+` = 1 or more  
   
@@ -272,6 +351,8 @@ variations on the theme:
 `[09-]` = 0, 9, or -
 
 ---
+
+class: exercise
 
 # mini quiz
 
@@ -290,6 +371,10 @@ variations on the theme:
 ---
 
 `\w` word  
+
+---
+
+
 
 ---
 

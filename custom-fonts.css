@@ -11,6 +11,14 @@
   font-weight: normal;
 }
 
+.inverse {
+  color: #f6f6f6;
+}
+
+.gray {
+  color: #cbcbcb;
+}
+
 .fancy {
     font-family: 'Parisienne', cursive; }
 
@@ -19,11 +27,16 @@
 }
 
 .xlarge {
-    font-size: 150%;
+    font-size: 300%;
 }
 
 .small {
     font-size: 80%;
+}
+
+.img-med img {
+    width: 30%;
+    height: auto;
 }
 
 .img-big img {
