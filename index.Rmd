@@ -146,7 +146,7 @@ If you're already familiar with the base R equivalents, check out [this vignette
 
 # Let's get some data
 
-```{r}
+```{r message = FALSE}
 spells <- read_csv("data/spells.csv") # from the rcorpora pkg
 
 (incantation <- spells$incantation[1:5])
