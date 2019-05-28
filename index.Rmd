@@ -13,6 +13,7 @@ output:
       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
 ```{r setup, include=FALSE}
+library(xaringan)
 library(knitr)
 library(tidyverse)
 options(tibble.print_min = 5)
@@ -55,12 +56,12 @@ Strings (character types) = pretty much anything surrounded by quotes
 
 ---
 
-# What's with the slash?
+# What's with the backslash?
 
 .center[.img-big[
 ![](https://media.giphy.com/media/gCwXh8EHKKfMk/giphy.gif)
 ]]
- 
+
 ---
 
 # Escaped characters
@@ -85,7 +86,7 @@ Some other examples:
 writeLines("Nitwit! \n\tBlubber! \n\t\tOddment! \n\U1F9D9\t\t\tTweak!")
 ```
 
-_You can also write emojis (or Hebrew letters) this way!_
+_You can also write emojis this way!_
 
 ---
 
@@ -119,24 +120,24 @@ _A consistent, simple and easy-to-use set of wrappers around the `stringi` packa
 # General pattern
 
 .center[.xlarge[
-str_.gray[verb](.gray[text], .gray[...]) 
+str_.gray[verb](.gray[string], .gray[...]) 
 ]] 
 
 .large[
-text = character string or vector
+string = character string or vector
 
-... = additional arguments include `pattern` to match or string to replace with
+... = additional arguments include `pattern` to match or replacement string
 ]
 ---
 
 # Functions for the day
 
 .large[
-- `str_count()`
-- `str_detect()` (`grepl()` in base R)
-- `str_subset()`
-- `str_view()`
-- `str_extract()`, `str_remove()`, `str_replace()` (`gsub()` in base R)
+- single-input functions: `str_verb(string)`
+- multi-input functions: `str_verb(string, pattern, ...)`
+- `*_all` variants
+- `str_glue()` for interpolating strings
+- `str_view()` for checking regex
 ]
 
 If you're already familiar with the base R equivalents, check out [this vignette](https://stringr.tidyverse.org/articles/from-base.html) for the "translations"
@@ -146,63 +147,44 @@ If you're already familiar with the base R equivalents, check out [this vignette
 # Let's get some data
 
 ```{r}
-# from the rcorpora package
-spells <- read_rds("data/spells.rds")
+spells <- read_csv("data/spells.csv") # from the rcorpora pkg
 
 (incantation <- spells$incantation[1:5])
 ```
 
+.center[![](https://media.giphy.com/media/kSjGBipdCXdHW/giphy.gif)]
+
 ---
 
-# Warm up
+.center[.xlarge[
+str_.gray[verb](.gray[string]) 
+]] 
 
 ```{r}
 # often a useful first step to avoid dealing with capitals
 str_to_lower(incantation) 
 
-str_count(incantation)
+str_length(incantation)
 ```
 
 ---
 
-# Warm up
+.center[.xlarge[
+str_.gray[verb](.gray[string], .gray[pattern]) 
+]] 
 
 ```{r}
-str_glue('Hermione shouted, "{incantation}!"')
-```
-
----
-
-# Level 2: add a pattern
-
-```{r}
-str_detect(incantation, "o")
-
+str_detect(incantation, "o") # similar to grepl
 str_subset(incantation, "o")
-```
-
---
-
-```{r}
-str_extract(incantation, "o.") # . = any character
-
-str_replace(incantation, "o", "!")
+str_count(incantation, "o")
 ```
 
 ---
 
-.center[.xlarge[str_.gray[verb]_all() ]]
+.center[.xlarge[str_.gray[verb]_all(.gray[string], .gray[...]) ]]
 
 ```{r}
-str_extract_all(incantation, "o.")
-```
-
----
-
-# Once more, with feeling!
-
-```{r}
-str_replace_all(incantation, "o", "!")
+str_extract_all(incantation, ".o")
 ```
 
 ---
@@ -211,12 +193,23 @@ class: exercise
 
 # Your turn
 
-How many `object`s are there in the effect description? Replace `object` with a different noun. 
+How many `object`s are there among the effect descriptions?   
+Replace `object` with a different noun. 
 
 ```{r}
 spells
 ```
 
+---
+
+.center[.xlarge[
+str_glue(.gray[...]) 
+]] 
+
+```{r}
+# works similarly to `paste()` or `sprintf()`
+str_glue('Hermione shouted, "{incantation}!"')
+```
 
 ---
 
@@ -225,6 +218,51 @@ class: inverse, center, middle
 .xlarge[regex]
 
 ## regular expressions
+
+---
+
+class: exercise
+
+# How would you extract out amounts of money?
+
+>"We'll bet 37 Galleons, 15 Sickles, 3 Knuts"  
+"George and I invented them - 7 Sickles each, a bargain!"  
+"True, both of them had paid 2 Sickles for a S.P.E.W. badge"  
+"And 1000 Galleons prize money!"
+
+--
+Pseudocode:
+
+```{r eval = FALSE}
+money_types <- c("Galleons", "Sickles", "Knuts") 
+
+sentences %>% 
+  extract(number_before(money_types), money_types) 
+```  
+
+---
+
+class: exercise
+
+>"We'll bet 37 Galleons, 15 Sickles, 3 Knuts"  
+"George and I invented them - 7 Sickles each, a bargain!"  
+"True, both of them had paid 2 Sickles for a S.P.E.W. badge"  
+"And 1000 Galleons prize money!"
+
+>"I pull down about 100 sacks of galleons a year!"
+
+--
+
+Pseudocode:
+
+```{r eval = FALSE}
+money_types <- c("Galleons", "Sickles", "Knuts") %>% 
+  to_lower_case() #<<
+
+sentences %>% 
+  to_lower_case() %>% #<<
+  extract(closest_number_before(money_types)), money_types) #<<
+```  
 
 ---
 
@@ -239,18 +277,21 @@ Other resources:
 - [regex101](https://regex101.com) - interepret regex
 - [regexplain](https://www.garrickadenbuie.com/project/regexplain/) - interpret and write regex (lots of cheatsheets)
 - [rex](https://github.com/kevinushey/rex) package - "friendly" regex
-- [rebus](https://cran.r-project.org/web/packages/rebus/rebus.pdf) pacjkage - "friendly" regex
+- [rebus](https://cran.r-project.org/web/packages/rebus/rebus.pdf) package - "friendly" regex
 
 ---
 
-# Key expressions that I use
+# Key expressions 
 
-There are other ways to write some of these but I've written my preferred methods
-  
+_Note:_ There are often several ways of writing the same regex. For this presentation, I chose my favorite style, which I find the most flexible
+
 `^` = start  
 `$` = end  
-  
 `.` = anything  
+
+```{r}
+str_subset(c("football", "baseball", "ballroom"), "ball$")
+```
 
 ---
 
@@ -303,7 +344,7 @@ class: exercise
 ---
 
 # Numbers of things
-  
+
 `*` = 0 or more  
 `+` = 1 or more  
 
@@ -416,7 +457,7 @@ spells %>%
   unnest(effect) #<<
 ```
 
-### _Note:_ this is very similar to the `unnest_tokens()` function in the `tidytext` package
+### _Note:_ this is very similar to the `unnest_tokens()` function in the [`tidytext`](https://www.tidytextmining.com/) package
 
 ---
 
@@ -497,6 +538,22 @@ Shortcut if you only care about the first number...
 ```{r}
 parse_number(text)
 ```
+
+---
+
+# Summary
+
+- strings/characters = things that are quoted in R
+- backslashes are used for "escape characters" (`\n`, `\\`)
+- use `writeLines()` to show how strings will display
+- `stringr` provides a simple, consistent interface to work with strings in R
+- regular expressions describe the logic of a pattern in text
+- check regex in R with `str_view()`/`str_view_all()`
+- use `unnest()` to expand list-columns
+
+Cheatsheets: [Basic regular expressions in R](https://www.rstudio.com/wp-content/uploads/2016/09/RegExCheatsheet.pdf), [Working with strings with stringr](https://resources.rstudio.com/rstudio-cheatsheets/stringr-cheat-sheet)
+
+Santa Barbara Eco-Data-Science [text workshop materials](https://github.com/eco-data-science/text_workshop) (covers pdftools, sentiment analysis, etc.)
 
 ---
 

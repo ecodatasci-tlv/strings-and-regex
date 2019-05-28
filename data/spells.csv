@@ -1,0 +1,92 @@
+incantation,effect,type
+Accio,Summons an object,Charm
+Aguamenti,Shoots water from wand,Charm
+Alohomora,Opens locked objects,Charm
+Anapneo,Clears the target's airway,Spell
+Aparecium,Reveals invisible ink,Spell
+Avada Kedavra,Murders opponent. Unforgivable,Curse
+Avifors,Turns small objects into birds,Charm
+Avis,Launches birds from wand,Spell
+Cave Inimicum,Strengthens an enclosure from enemies,Spell
+Colloportus,Magically locks door,Spell
+Confringo,Explodes flames on target,Curse
+Confundus,Confuses opponent,Charm
+Conjunctivitis,Damages opponent's eyesight,Curse
+Crucio,Tortures opponent. Unforgivable,Curse
+Defodio,Digs out materials,Spell
+Deletrius,Counters Prior Incatato,Spell
+Densaugeo,Enlarges teeth,Spell
+Deprimo,Damages with wind,Spell
+Diffindo,Splits seams,Spell
+Dissendium,"Opens ""One eyed witch"" hump",Spell
+Duro,Makes objects hard,Spell
+Engorgio,Enlarges an item,Charm
+Ennervate,Counters Stupefy,Spell
+Episkey,Heals minor injuries,Spell
+Erecto,Erects things,Spell
+Expecto Patronum,Creates a Patronus,Charm
+Expelliarmus,Disarms an opponent,Charm
+Expulso,Makes objects explode,Spell
+Ferula,Creates bandages,Spell
+Fidelius,Hides a secret within someone,Charm
+Finite Incantatum,Stops any current spells,Spell
+Flagrate,Allows user to write on objects,Spell
+Flipendo,Knocks an object backwards,Jinx
+Furnunculus,Produces boils on opponent,Curse
+Geminio,Duplicates an object,Spell
+Glisseo,Turns stairs into ramps,Spell
+Homenum Revelio,Reveals humans nearby,Spell
+Homorphus,"Lockhart's Werewolf ""cure""",Charm
+Immobulus,Renders target immobile,Charm
+Impedimenta,Slows an advancing object,Charm
+Imperio,Controls a person. Unforgivable,Curse
+Impervius,Makes an object repel water,Charm
+Incarcerous,Ties victim up,Spell
+Incendio,Starts a fire,Spell
+Langlock,Glues opponent's tongue to roof of mouth,Spell
+Legilimens,Allows the caster to delve into the mind of the victim,Spell
+Levicorpus,Hangs victim upside down by feet,Spell
+Liberacorpus,Counters Levicorpus,Spell
+Locomotor Mortis,Locks opponents legs,Curse
+Lumos,Creates light at wand tip,Spell
+Meteolojinx Recanto,Causes weather effect spells to stop,Spell
+Mobiliarbus,Moves objects with wand,Charm
+Mobilicorpus,Moves unconscious bodies,Spell
+Morsmorde,Conjures the Dark Mark,Spell
+Muffliato,Prevents nearby people from listening to conversations,Spell
+Nox,Counters Lumos,Spell
+Obliviate,Erases memories,Charm
+Obscuro,Blindfolds the victim,Spell
+Oppugno,Makes conjured items attack,Spell
+Orchideous,Conjures a bunch of flowers,Spell
+Pack,Packs a trunk (suitcase),Spell
+Peskipiksi Pesternomi,Removes Pixies (maybe),Spell
+Petrificus Totalus,Binds victim's body,Spell
+Piertotum Locomotor,Animates statues and armor suits,Spell
+Point Me,Makes wand act like a compass,Charm
+Priori Incantatem,Result when brother wands duel,Spell
+Prior Incantato,Reveals a wand's last spell / cast,Spell
+Protego,Causes spells to reflect back to the sender,Charm
+Protego Horribilis,Protects one from Dark Magic,Spell
+Protego Totalum,Protects an area,Spell
+Quietus,Counters Sonorus,Spell
+Reducio,Returns items to original size. Counters Engorgio,Spell
+Reducto,Blasts solid objects aside,Spell
+Relashio,Releases user from binding,Spell
+Rennervate,Cures unconsciousness,Spell
+Reparo,Repairs things,Spell
+Repello Muggletum,Keeps Muggles away,Spell
+Rictusempra,Tickles opponent,Charm
+Riddikulus,Defeats a boggart when used with laughter,Spell
+Salvio Hexia,Protects against hexes,Spell
+Scruge,Destroys ectoplasm (remains of ghosts),Charm
+Sectumsempra,Causes wounds as if slashed by a sword,Spell
+Serpensortia,Produces a snake,Spell
+Silencio,Silences victim,Spell
+Sonorus,Amplifies voice,Spell
+Specialis Revelio,Reveals hidden secrets or magical properties,Spell
+Stupefy,Knocks out opponent,Spell
+Tarantallegra,Forces opponent to dance,Spell
+Tergeo,Cleans up messes,Spell
+Waddiwasi,Unsticks an object,Spell
+Wingardium Leviosa,Makes an object fly,Charm
